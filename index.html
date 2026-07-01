@@ -1,43 +1,57 @@
-<!--
-  JohnBobApps — studio page
-  Lightweight, single file. No JavaScript, no <input>, no element IDs
-  (so it survives Weebly's embed sanitizer). The outer .stage uses the
-  full-bleed wrapper so the felt background overrides Weebly's white host.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JohnBobApps — Independent app studio</title>
+<meta name="description" content="JohnBobApps builds small, private tools you buy once — no accounts, no ads, no cloud. Home of Casino Bankroll Pro.">
 
-  TO USE:
-  1) Replace APPLE_STORE_URL_HERE with your real App Store link.
-  2) When Google Play goes live, swap the "coming soon" span for an <a>.
-  3) Optional: replace the inline SVG chip with your real 512px icon:
-     <img src="your-icon.png" alt="Casino Bankroll Pro" class="app-icon">
--->
+<!-- Social sharing preview -->
+<meta property="og:title" content="JohnBobApps — Independent app studio">
+<meta property="og:description" content="Small, private tools you buy once. No accounts, no ads, nothing phoning home.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://johnbobapps.com">
+<meta name="twitter:card" content="summary">
+
+<!-- Chip favicon, inline so there's no extra file to host -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230E3B2C' stroke='%23E3B341' stroke-width='4'/><circle cx='50' cy='50' r='46' fill='none' stroke='%23FF9F0A' stroke-width='7' stroke-dasharray='11 15' opacity='0.85'/><text x='50' y='67' text-anchor='middle' font-family='Georgia,serif' font-size='44' font-weight='700' fill='%23FF9F0A'>$</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 
+<!--
+  JohnBobApps — studio page (standalone, hosted directly on GitHub Pages).
+  TO EDIT:
+  1) Replace APPLE_STORE_URL_HERE with your real App Store link.
+  2) When Google Play goes live, swap the "coming soon" span for an <a>.
+  3) Optional: replace the inline SVG app icon with your real 512px icon:
+     <img src="icon.png" alt="Casino Bankroll Pro" class="app-icon">
+-->
+
 <style>
-  .stage {
-    /* full-bleed wrapper — overrides Weebly's white background */
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    transform: translateX(-50%);
-    box-sizing: border-box;
-    overflow: hidden;
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-text-size-adjust: 100%;   /* stop iOS from inflating text */
+    background: #060807;                /* fills overscroll area */
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;                 /* belt-and-suspenders vs. sideways scroll */
     color: #EDE6D6;
     font-family: "DM Sans", system-ui, sans-serif;
     line-height: 1.6;
     /* spotlight over a felt table: green glow fading to near-black */
     background:
-      radial-gradient(120% 90% at 50% -10%, #12472F 0%, #0C3021 38%, #071B13 68%, #060807 100%);
+      radial-gradient(130% 80% at 50% -8%, #12472F 0%, #0C3021 36%, #071B13 66%, #060807 100%);
   }
-  .stage *,
-  .stage *::before,
-  .stage *::after { box-sizing: border-box; }
 
   .wrap {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 26px 24px 64px;
+    padding: 22px 22px 56px;
   }
 
   /* ---- top bar ---- */
@@ -61,19 +75,22 @@
   }
   .chip { width: 30px; height: 30px; flex: none; }
   .bar-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;                   /* comfortable tap target */
     font-size: 0.86rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: #E3B341;
     text-decoration: none;
-    padding: 6px 2px;
+    padding: 4px 2px;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s ease;
   }
   .bar-link:hover { border-color: #E3B341; }
 
   /* ---- hero ---- */
-  .hero { padding: 66px 0 40px; position: relative; }
+  .hero { padding: 62px 0 40px; position: relative; }
   .eyebrow {
     font-size: 0.76rem;
     letter-spacing: 0.28em;
@@ -84,11 +101,12 @@
   .hero h1 {
     font-family: "Playfair Display", Georgia, serif;
     font-weight: 700;
-    font-size: clamp(2.7rem, 8vw, 5rem);
-    line-height: 1.02;
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    line-height: 1.03;
     letter-spacing: -0.5px;
     margin: 0;
     color: #F5EFE1;
+    overflow-wrap: break-word;          /* never let the wordmark overflow */
   }
   .hero h1 .amp { color: #FF9F0A; }
   .lede {
@@ -96,18 +114,19 @@
     font-size: clamp(1.05rem, 2.4vw, 1.32rem);
     color: #C9C4B4;
     margin: 22px 0 0;
+    text-wrap: pretty;
   }
   /* the signature: a gold pass-line arc, a nod to the craps table */
   .passline {
     display: block;
     width: min(560px, 100%);
-    height: 60px;
+    height: 56px;
     margin-top: 30px;
     opacity: 0.9;
   }
 
   /* ---- section scaffolding ---- */
-  .section { padding-top: 58px; }
+  .section { padding-top: 56px; }
   .section-head {
     display: flex;
     align-items: baseline;
@@ -124,7 +143,7 @@
   /* ---- apps grid ---- */
   .apps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
   }
   .card {
@@ -157,11 +176,13 @@
   .store {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 9px;
-    font-size: 0.9rem;
+    min-height: 44px;                   /* Apple/Google recommended tap size */
+    font-size: 0.92rem;
     font-weight: 500;
     text-decoration: none;
-    padding: 10px 16px;
+    padding: 10px 18px;
     border-radius: 10px;
   }
   .store.live {
@@ -183,11 +204,12 @@
     font-size: 1.06rem;
     color: #CFCABA;
     margin: 0;
+    text-wrap: pretty;
   }
 
   /* ---- footer ---- */
   .foot {
-    margin-top: 64px;
+    margin-top: 60px;
     padding-top: 24px;
     border-top: 1px solid rgba(227,179,65,0.22);
     display: flex;
@@ -198,20 +220,32 @@
     font-size: 0.9rem;
     color: #9AA79A;
   }
-  .foot a { color: #E3B341; text-decoration: none; }
+  .foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    color: #E3B341;
+    text-decoration: none;
+  }
   .foot a:hover { text-decoration: underline; }
-  .foot-links { display: flex; flex-wrap: wrap; gap: 22px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 14px 22px; }
 
   /* ---- a11y + polish ---- */
-  .stage a:focus-visible,
-  .store:focus-visible {
+  a:focus-visible {
     outline: 2px solid #FF9F0A;
     outline-offset: 3px;
     border-radius: 4px;
   }
-  @media (min-width: 640px) {
-    .wrap { padding-top: 34px; }
+
+  /* ---- small screens ---- */
+  @media (max-width: 600px) {
+    .wrap { padding: 18px 18px 48px; }
+    .hero { padding: 40px 0 32px; }
+    .section { padding-top: 46px; }
+    .lede { margin-top: 18px; }
+    .foot { justify-content: flex-start; }
   }
+
   .rise { opacity: 0; transform: translateY(14px); animation: rise 0.7s ease forwards; }
   .rise.d1 { animation-delay: 0.05s; }
   .rise.d2 { animation-delay: 0.15s; }
@@ -222,8 +256,8 @@
     .store.live { transition: none; }
   }
 </style>
-
-<div class="stage">
+</head>
+<body>
   <div class="wrap">
 
     <header class="bar">
@@ -243,7 +277,7 @@
 
     <section class="hero">
       <p class="eyebrow rise d1">Independent app studio</p>
-      <h1 class="rise d2">JohnBob<span class="amp">Apps</span></h1>
+      <h1 class="rise d2">JohnBob<wbr><span class="amp">Apps</span></h1>
       <p class="lede rise d3">Small, private tools you buy once. No accounts, no ads, nothing phoning home.</p>
 
       <svg class="passline" viewBox="0 0 560 60" fill="none" aria-hidden="true">
@@ -312,4 +346,5 @@
     </footer>
 
   </div>
-</div>
+</body>
+</html>
